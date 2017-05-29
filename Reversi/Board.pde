@@ -33,4 +33,8 @@ class Board{
             println();
         }
     }
+
+    boolean hasGameFinished(){
+        return whiteTiles + blackTiles == 64;
+    }
 }
