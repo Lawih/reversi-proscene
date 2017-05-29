@@ -6,24 +6,27 @@ class Board{
     char [][] board;
     int whiteTiles;
     int blackTiles;
+    int boardSize;
 
-    Board(){
-        board = new char[8][8];
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
+    Board(int size){
+        boardSize = size;
+        board = new char[boardSize][boardSize];
+        for (int i = 0; i < boardSize; ++i) {
+            for (int j = 0; j < boardSize; ++j) {
                 board[i][j] = '-';
             }
         }
-        board[3][3] = board[4][4] = 'B'; 
-        board[3][4] = board[4][3] = 'W';
+
+        int initialTile = boardSize / 2;
+        board[initialTile - 1][initialTile - 1] = board[initialTile][initialTile] = 'B'; 
+        board[initialTile - 1][initialTile] = board[initialTile][initialTile - 1] = 'W';
         updateAmountTiles();
-        println("Valid movement: " + isAValidMovement(new Pair(5, 3), 'B'));
     }
 
     void updateAmountTiles(){
         whiteTiles = blackTiles = 0;
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
+        for (int i = 0; i < boardSize; ++i) {
+            for (int j = 0; j < boardSize; ++j) {
                 whiteTiles += board[i][j] == 'W' ? 1 : 0;
                 blackTiles += board[i][j] == 'B' ? 1 : 0;
             }
@@ -31,8 +34,8 @@ class Board{
     }
 
     void printMatrix(){
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
+        for (int i = 0; i < boardSize; ++i) {
+            for (int j = 0; j < boardSize; ++j) {
                 print(board[i][j]);
             }
             println();
@@ -40,7 +43,7 @@ class Board{
     }
 
     boolean hasGameFinished(){
-        return whiteTiles + blackTiles == 64;
+        return whiteTiles + blackTiles == boardSize * boardSize;
     }
 
     boolean isAValidMovement(Pair mov, char tile){
@@ -66,6 +69,6 @@ class Board{
     }
 
     boolean isAValidCoordinate(int x, int y){
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
+        return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
     }
 }

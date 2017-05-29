@@ -1,5 +1,5 @@
 Board currentBoard;
 
 void setup(){
-  currentBoard = new Board();
+  currentBoard = new Board(8);
 }
