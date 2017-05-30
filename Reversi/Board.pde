@@ -43,7 +43,7 @@ class Board{
     }
 
     boolean hasGameFinished(){
-        return whiteTiles + blackTiles == boardSize * boardSize;
+        return (whiteTiles + blackTiles == boardSize * boardSize) || (possibleMovements('B').size() == 0 && possibleMovements('W').size() == 0);
     }
 
     boolean isAValidMovement(Pair mov, char tile){
@@ -58,10 +58,23 @@ class Board{
                 y += yMovs[i];
             }
 
-            if(isAValidCoordinate(x, y) && tile == board[y][x])
+            if(oppositeTile && isAValidCoordinate(x, y) && tile == board[y][x])
                 return true;
         }
         return false;
+    }
+
+    ArrayList<Pair> possibleMovements(char player){
+        ArrayList<Pair> result = new ArrayList<Pair>();
+        for (int i = 0; i < boardSize; ++i) {
+            for (int j = 0; j < boardSize; ++j) {
+                Pair cur = new Pair(j, i);
+                if (board[i][j] == '-' && isAValidMovement(cur, player)) {
+                    result.add(cur);
+                }
+            }
+        }
+        return result;
     }
 
     boolean isAnOppositeTile(char cur, char sub){
