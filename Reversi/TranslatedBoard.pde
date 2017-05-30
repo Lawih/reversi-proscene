@@ -2,11 +2,14 @@ class TranslatedBoard{
   Tile[][] tiles;
   Board board;
   int size;
+  char player;
+  boolean skipped;
   
-  public TranslatedBoard( int size, Board board ){
+  public TranslatedBoard( int size, Board board, char player ){
     this.size = size;
     tiles = new Tile[size][size];
     this.board = board; 
+    this.player = player;
     translateBoard();
   } 
   
@@ -35,21 +38,37 @@ class TranslatedBoard{
     tiles = new Tile[size][size];    
   } 
   
+  public void setOppositePlayer(){
+    if( player == 'W' )
+      player = 'B';
+    else
+      player = 'W';
+  }
+  
   public void makeMove(Tile tile) {
-    Pair mov;
+    Pair mov = null;
 
     for( int i = 0; i < size; ++i ){
       for( int j = 0; j < size; ++j ){
-        if (tiles[i][j] == tile) { // is this the tile we click on?
+        if (tiles[i][j] == tile) { // Is this the tile we click on?
           mov = new Pair(j, i);
         }
       }
     }
     
-    board.makeAMove(mov, 'B');
-    print(mov.x);
-    println();
-    print(mov.y);
-    translateBoard();
+    if( mov != null ){
+      if ( board.makeAMove(mov, player) ){
+        // Change player
+        setOppositePlayer();
+        
+        // Check if next player has movements
+        if( board.possibleMovements(player).isEmpty() ){
+          skipped = true;
+          setOppositePlayer();
+        }
+      }
+      
+      translateBoard();
+    }
   }  
 }

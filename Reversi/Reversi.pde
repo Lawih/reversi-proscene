@@ -5,6 +5,7 @@ Board board;
 TranslatedBoard graphicBoard;
 Scene scene;
 Tile tile; 
+char player;
 int size = 8;
 
 void setup(){
@@ -14,8 +15,8 @@ void setup(){
   scene.setGridVisualHint(false); // hide grid
   
   board = new Board(size);
-  graphicBoard = new TranslatedBoard( size, board );  
-  
+  player = 'B';
+  graphicBoard = new TranslatedBoard( size, board, player );  
 }
 
 void draw() {
@@ -34,6 +35,9 @@ void draw() {
 
 public void drawText() {
   fill(#BBBBBB); 
+  // Skipped and player  
   text("Press 's' to show possible moves, 'n' to start a new game, 'p' to show counters, 'q' to increase size, 'w' to decrease size.", 5, height - 5);
   fill(#EEEEEE);
+  String player = (graphicBoard.player == 'W' ? "White" : "Black");
+  text( player + ", you go.", 5, height - 20);
 }

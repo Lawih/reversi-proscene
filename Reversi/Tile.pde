@@ -106,7 +106,6 @@ public class Tile extends InteractiveFrame {
 
   public void play(ClickEvent event) {
     board.makeMove(this);
-    print("Hehe");
   }
 
   public float getSize() {
