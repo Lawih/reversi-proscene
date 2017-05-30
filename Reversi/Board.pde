@@ -64,7 +64,7 @@ class Board{
         return false;
     }
 
-    void makeAMove(Pair mov, char player){
+    boolean makeAMove(Pair mov, char player){
         if(isAValidMovement(mov, player)){
             for (int i = 0; i < yMovs.length; ++i) {
                 int x = mov.x + xMovs[i];
@@ -87,9 +87,10 @@ class Board{
                     }
                 }
             }
+            return true;
         }
         else{
-            println("Not a valid movement");
+            return false;
         }
         updateAmountTiles();
     }
