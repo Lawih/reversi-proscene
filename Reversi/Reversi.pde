@@ -30,19 +30,33 @@ void draw() {
 }
 
 public void drawText() {
+  boolean gameHasFinished = board.hasGameFinished();
+
   fill(#BBBBBB); 
   // Skipped and player 
   textSize(12); 
   fill(#EEEEEE);
   text("Press 's' to show possible moves, 'n' to start a new game.", 5, height - 5);
-  String player = (graphicBoard.player == 'W' ? "White" : "Black");
-  text( player + ", you go.", 5, height - 20);
+
+  if( gameHasFinished ){
+    textSize(30);
+    if( board.whiteTiles > board.blackTiles ){
+      text("White wins!", 5, height - 30);
+    }else if( board.blackTiles > board.whiteTiles ){
+      text("Black wins!", 5, height - 30);
+    }else{
+      text("It's a tie!", 5, height - 30);
+    }
+  }else{
+    String player = (graphicBoard.player == 'W' ? "White" : "Black");
+    text( player + ", you go.", 5, height - 20);
+  }
   textSize(20);
-  if(graphicBoard.player == 'W')
+  if(graphicBoard.player == 'W' && !gameHasFinished )
     fill(#FADE69);
   text( "White tiles: " + graphicBoard.board.whiteTiles, 5, 20);
   fill(#EEEEEE);
-  if(graphicBoard.player == 'B')
+  if(graphicBoard.player == 'B' && !gameHasFinished )
     fill(#FADE69);
   text( "Black tiles: " + graphicBoard.board.blackTiles, 5, 45);
 }
