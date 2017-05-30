@@ -64,6 +64,36 @@ class Board{
         return false;
     }
 
+    void makeAMove(Pair mov, char player){
+        if(isAValidMovement(mov, player)){
+            for (int i = 0; i < yMovs.length; ++i) {
+                int x = mov.x + xMovs[i];
+                int y = mov.y + yMovs[i];
+                boolean oppositeTile = false;
+                ArrayList<Pair> toChange = new ArrayList<Pair>();
+                toChange.add(mov);
+            
+                while( isAValidCoordinate(x,y) && isAnOppositeTile(player, board[y][x])){
+                    oppositeTile = true;
+                    toChange.add(new Pair(x, y));
+                    x += xMovs[i];
+                    y += yMovs[i];
+                }
+
+                if(oppositeTile && isAValidCoordinate(x, y) && player == board[y][x]){
+                    for (int j = 0; j < toChange.size(); ++j) {
+                        Pair cur = toChange.get(j);
+                        board[cur.y][cur.x] = player;
+                    }
+                }
+            }
+        }
+        else{
+            println("Not a valid movement");
+        }
+        updateAmountTiles();
+    }
+
     ArrayList<Pair> possibleMovements(char player){
         ArrayList<Pair> result = new ArrayList<Pair>();
         for (int i = 0; i < boardSize; ++i) {
