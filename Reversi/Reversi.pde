@@ -1,11 +1,9 @@
 import remixlab.proscene.*;
 import remixlab.bias.event.*;
 
-Board board;
 TranslatedBoard graphicBoard;
 Scene scene;
-Tile tile; 
-char player;
+Tile tile;
 int size = 8;
 
 void setup(){
@@ -14,9 +12,7 @@ void setup(){
   scene.setAxesVisualHint(false); // hide axis
   scene.setGridVisualHint(false); // hide grid
   
-  board = new Board(size);
-  player = 'B';
-  graphicBoard = new TranslatedBoard( size, board, player );  
+  graphicBoard = new TranslatedBoard( size );  
 }
 
 void draw() {
@@ -44,15 +40,17 @@ public void drawText() {
   textSize(20);
   if(graphicBoard.player == 'W')
     fill(#FADE69);
-  text( "White tiles: " + board.whiteTiles, 5, 20);
+  text( "White tiles: " + graphicBoard.board.whiteTiles, 5, 20);
   fill(#EEEEEE);
   if(graphicBoard.player == 'B')
     fill(#FADE69);
-  text( "Black tiles: " + board.blackTiles, 5, 45);
+  text( "Black tiles: " + graphicBoard.board.blackTiles, 5, 45);
 }
 
 void keyPressed() {
   if (key == 's' || key == 'S') {
     graphicBoard.setShowingMoves();
-  }
+  } else if (key == 'n' || key == 'N') {    
+    graphicBoard.clear(); 
+  } 
 }

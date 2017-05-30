@@ -6,11 +6,12 @@ class TranslatedBoard{
   boolean skipped;
   boolean showingMoves;
   
-  public TranslatedBoard( int size, Board board, char player ){
+  public TranslatedBoard( int size ){
     this.size = size;
-    tiles = new Tile[size][size];
-    this.board = board; 
-    this.player = player;
+    this.tiles = new Tile[size][size];
+    this.board = new Board(size); 
+    this.player = 'B';
+    
     showingMoves = true;
     createBoard();
     translateBoard();
@@ -55,7 +56,8 @@ class TranslatedBoard{
   }
   
   public void clear(){
-    tiles = new Tile[size][size];    
+    board = new Board(size);
+    player = 'B';
   } 
   
   public void setOppositePlayer(){
@@ -91,8 +93,6 @@ class TranslatedBoard{
           setOppositePlayer();
         }
       }
-      
-      // translateBoard();
     }
   }  
 }
