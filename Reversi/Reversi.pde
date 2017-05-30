@@ -30,7 +30,7 @@ void draw() {
 }
 
 public void drawText() {
-  boolean gameHasFinished = board.hasGameFinished();
+  boolean gameHasFinished = graphicBoard.board.hasGameFinished();
 
   fill(#BBBBBB); 
   // Skipped and player 
@@ -40,9 +40,9 @@ public void drawText() {
 
   if( gameHasFinished ){
     textSize(30);
-    if( board.whiteTiles > board.blackTiles ){
+    if( graphicBoard.board.whiteTiles > board.blackTiles ){
       text("White wins!", 5, height - 30);
-    }else if( board.blackTiles > board.whiteTiles ){
+    }else if( graphicBoard.board.blackTiles > graphicBoard.board.whiteTiles ){
       text("Black wins!", 5, height - 30);
     }else{
       text("It's a tie!", 5, height - 30);
