@@ -6,18 +6,18 @@ class Board{
     char [][] board;
     int whiteTiles;
     int blackTiles;
-    int boardSize;
+    int size;
 
     Board(int size){
-        boardSize = size;
-        board = new char[boardSize][boardSize];
-        for (int i = 0; i < boardSize; ++i) {
-            for (int j = 0; j < boardSize; ++j) {
+        this.size = size;
+        board = new char[size][size];
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
                 board[i][j] = '-';
             }
         }
 
-        int initialTile = boardSize / 2;
+        int initialTile = this.size / 2;
         board[initialTile - 1][initialTile - 1] = board[initialTile][initialTile] = 'B'; 
         board[initialTile - 1][initialTile] = board[initialTile][initialTile - 1] = 'W';
         updateAmountTiles();
@@ -25,17 +25,17 @@ class Board{
 
     void updateAmountTiles(){
         whiteTiles = blackTiles = 0;
-        for (int i = 0; i < boardSize; ++i) {
-            for (int j = 0; j < boardSize; ++j) {
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
                 whiteTiles += board[i][j] == 'W' ? 1 : 0;
                 blackTiles += board[i][j] == 'B' ? 1 : 0;
             }
         }
     }
 
-    void printMatrix(){
-        for (int i = 0; i < boardSize; ++i) {
-            for (int j = 0; j < boardSize; ++j) {
+    void printBoard(){
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
                 print(board[i][j]);
             }
             println();
@@ -43,7 +43,7 @@ class Board{
     }
 
     boolean hasGameFinished(){
-        return (whiteTiles + blackTiles == boardSize * boardSize) || (possibleMovements('B').size() == 0 && possibleMovements('W').size() == 0);
+        return (whiteTiles + blackTiles == size * size) || (possibleMovements('B').size() == 0 && possibleMovements('W').size() == 0);
     }
 
     boolean isAValidMovement(Pair mov, char tile){
@@ -87,18 +87,18 @@ class Board{
                     }
                 }
             }
+            updateAmountTiles();
             return true;
         }
         else{
             return false;
         }
-        updateAmountTiles();
     }
 
     ArrayList<Pair> possibleMovements(char player){
         ArrayList<Pair> result = new ArrayList<Pair>();
-        for (int i = 0; i < boardSize; ++i) {
-            for (int j = 0; j < boardSize; ++j) {
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
                 Pair cur = new Pair(j, i);
                 if (board[i][j] == '-' && isAValidMovement(cur, player)) {
                     result.add(cur);
@@ -113,6 +113,6 @@ class Board{
     }
 
     boolean isAValidCoordinate(int x, int y){
-        return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
+        return x >= 0 && x < size && y >= 0 && y < size;
     }
 }
