@@ -1,5 +1,6 @@
 import remixlab.proscene.*;
 import remixlab.bias.event.*;
+import remixlab.dandelion.geom.*;
 
 TranslatedBoard graphicBoard;
 Scene scene;
@@ -13,6 +14,9 @@ void setup(){
   scene.setGridVisualHint(false); // hide grid
   
   graphicBoard = new TranslatedBoard( size );  
+  
+  scene.camera().setPosition(new Vec(0, 100, 100)); // move the camera
+  scene.camera().lookAt(new Vec(0, 0, 0)); // make the camera look at the center of the board
 }
 
 void draw() {
@@ -40,7 +44,7 @@ public void drawText() {
 
   if( gameHasFinished ){
     textSize(30);
-    if( graphicBoard.board.whiteTiles > board.blackTiles ){
+    if( graphicBoard.board.whiteTiles > graphicBoard.board.blackTiles ){
       text("White wins!", 5, height - 30);
     }else if( graphicBoard.board.blackTiles > graphicBoard.board.whiteTiles ){
       text("Black wins!", 5, height - 30);
