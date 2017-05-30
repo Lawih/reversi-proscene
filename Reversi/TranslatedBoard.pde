@@ -11,7 +11,7 @@ class TranslatedBoard{
   public void translate( Board board ){
     for( int i = 0; i < board.size; ++i ){
       for( int j = 0; j < board.size; ++j ){
-        tiles[i][j] = new Tile( board.board[i][j], 150f / size, scene, board); // create the new tile;        
+        tiles[i][j] = new Tile( board.board[i][j], 160f / size, scene, this); // create the new tile;        
       }
     }
   }
@@ -31,5 +31,8 @@ class TranslatedBoard{
   public void clear(){
     tiles = new Tile[size][size];    
   } 
+  
+  public void makeMove(Tile tile) {    
+  }
   
 }

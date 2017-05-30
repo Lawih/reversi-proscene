@@ -10,6 +10,8 @@ int size = 8;
 void setup(){
   size(800, 600, P3D); // window size
   scene = new Scene(this); // create a Scene instance
+  scene.setAxesVisualHint(false); // hide axis
+  scene.setGridVisualHint(false); // hide grid
   
   board = new Board(size);
   graphicBoard = new TranslatedBoard( size, board );  
