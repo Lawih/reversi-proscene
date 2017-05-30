@@ -35,9 +35,18 @@ void draw() {
 
 public void drawText() {
   fill(#BBBBBB); 
-  // Skipped and player  
-  text("Press 's' to show possible moves, 'n' to start a new game, 'p' to show counters, 'q' to increase size, 'w' to decrease size.", 5, height - 5);
+  // Skipped and player 
+  textSize(12); 
   fill(#EEEEEE);
+  text("Press 's' to show possible moves, 'n' to start a new game, 'p' to show counters, 'q' to increase size, 'w' to decrease size.", 5, height - 5);
   String player = (graphicBoard.player == 'W' ? "White" : "Black");
   text( player + ", you go.", 5, height - 20);
+  textSize(20);
+  if(graphicBoard.player == 'W')
+    fill(#FADE69);
+  text( "White tiles: " + board.whiteTiles, 5, 20);
+  fill(#EEEEEE);
+  if(graphicBoard.player == 'B')
+    fill(#FADE69);
+  text( "Black tiles: " + board.blackTiles, 5, 45);
 }
