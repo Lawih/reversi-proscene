@@ -50,3 +50,9 @@ public void drawText() {
     fill(#FADE69);
   text( "Black tiles: " + board.blackTiles, 5, 45);
 }
+
+void keyPressed() {
+  if (key == 's' || key == 'S') {
+    graphicBoard.setShowingMoves();
+  }
+}

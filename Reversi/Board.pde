@@ -107,6 +107,24 @@ class Board{
         }
         return result;
     }
+    
+    char[][] getPossibleMovementsMarked(char player){
+        char [][] result = new char[size][size];
+        for (int i = 0; i < size; ++i)
+            for (int j = 0; j < size; ++j)
+                result[i][j] = board[i][j];              
+        
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                Pair cur = new Pair(j, i);
+                if (board[i][j] == '-' && isAValidMovement(cur, player)) {
+                    result[i][j] = '*';
+                }
+            }
+        }
+        
+        return result;
+    }
 
     boolean isAnOppositeTile(char cur, char sub){
         return (cur == 'B' && sub == 'W') || (cur == 'W' && sub == 'B' );
