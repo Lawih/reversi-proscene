@@ -38,7 +38,7 @@ public void drawText() {
   // Skipped and player 
   textSize(12); 
   fill(#EEEEEE);
-  text("Press 's' to show possible moves, 'n' to start a new game, 'p' to show counters, 'w' to decrease size.", 5, height - 5);
+  text("Press 's' to show possible moves, 'n' to start a new game.", 5, height - 5);
   String player = (graphicBoard.player == 'W' ? "White" : "Black");
   text( player + ", you go.", 5, height - 20);
   textSize(20);
